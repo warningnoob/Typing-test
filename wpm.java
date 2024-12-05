@@ -6,6 +6,8 @@ import java.util.Random;
 import java.util.ArrayList;
 
 public class wpm {
+    private static boolean timerStarted = false; //some bs 
+    private static long startTime;
     public static void main(String[] args) {
 
         //list of my words
@@ -33,6 +35,18 @@ public class wpm {
         JTextField textField = new JTextField();
         textField.setBounds(50,150, 200,30);
 
+        //start time when typing
+        textField.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                if (!timerStarted) {
+                    timerStarted = true;
+                    startTime = System.currentTimeMillis();
+                    System.out.println("time start");
+                }
+            }
+        });
+        
+
         JLabel sentenceJLabel = new JLabel("Type this: " + testSentence);
         //find a way to dynamicaly change the length
         sentenceJLabel.setBounds(100, 100, 200, 30);
@@ -43,14 +57,16 @@ public class wpm {
         frame.setSize(400, 400);
         frame.setLayout(null);
         
-        //Text event
+        //Text event when enter is pressed
         textField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String userInput = textField.getText();
                 if (userInput.equals(testSentence)) {
-                    JOptionPane.showMessageDialog(frame, "Correct");
+                    long elapsedTime = System.currentTimeMillis() - startTime;
+                    JOptionPane.showMessageDialog(frame, "Correct! Time taken: " + elapsedTime / 1000.0 + " seconds");
                 } else {
                     JOptionPane.showMessageDialog(frame, "Try again");
+                    textField.setText("");
                 }
             }
         }); 
