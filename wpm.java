@@ -18,7 +18,8 @@ public class wpm {
         words.add("into");
         words.add("through");
         words.add("nation");
-
+        words.add("without");
+        
         //random generator
         Random rand = new Random();
         int randInt1 = rand.nextInt(words.size());
@@ -49,7 +50,7 @@ public class wpm {
 
         JLabel sentenceJLabel = new JLabel("Type this: " + testSentence);
         //find a way to dynamicaly change the length
-        sentenceJLabel.setBounds(100, 100, 200, 30);
+        sentenceJLabel.setBounds(100, 100, 500, 30);
 
         //frame things
         frame.add(textField);
